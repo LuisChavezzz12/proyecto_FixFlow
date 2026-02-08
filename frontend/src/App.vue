@@ -7,7 +7,6 @@ import { RouterView } from 'vue-router'
 </template>
 
 <style>
-/* --- ESTILOS GLOBALES (Sin 'scoped' para que apliquen a toda la app) --- */
 
 :root {
   /* Paleta de Colores FixFlow */
