@@ -1,127 +1,94 @@
 <template>
-    <div class="split-screen">
-        <div class="left-pane">
-            <div class="overlay">
-                <div class="overlay-content">
-                    <h2>{{ title }}</h2>
-                    <p>{{ subtitle }}</p>
-                </div>
-            </div>
+  <div class="split-screen">
+    
+    <div class="left-pane">
+      <div class="overlay">
+        <div class="overlay-content">
+          <h2>{{ title }}</h2>
+          <p>{{ subtitle }}</p>
         </div>
-
-        <div class="right-pane">
-            <div class="auth-container">
-
-                <div class="brand-header">
-                    <h1>FixFlow</h1>
-                    <p class="form-title">{{ formTitle }}</p>
-                </div>
-
-                <slot></slot>
-
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="right-pane">
+      <div class="auth-container">
+        <slot></slot>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script setup>
-// Definimos qué textos puede recibir este layout
 defineProps({
-    title: { type: String, default: 'Mantén el Control' },
-    subtitle: { type: String, default: 'Gestiona tu taller de principio a fin.' },
-    formTitle: { type: String, default: 'Bienvenido' }
+  title: { type: String, default: 'Mantén el Control' },
+  subtitle: { type: String, default: 'Gestiona tu taller de principio a fin.' }
+  // Eliminamos formTitle porque el título lo maneja la tarjeta interna
 });
 </script>
 
 <style scoped>
-/* PEGA AQUÍ TODO EL CSS QUE HICIMOS ANTES PARA EL LOGIN */
-/* (Copiado de la respuesta anterior para que funcione directo) */
-
+/* ESTRUCTURA PRINCIPAL */
 .split-screen {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: white;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: white;
 }
 
-/* IZQUIERDA */
+/* IZQUIERDA (Imagen) */
 .left-pane {
-    width: 45%;
-    background-color: #1e3a8a;
-    background-image: url();
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  display: none; /* Oculto en móvil */
+  width: 50%;    /* 50% exacto */
+  background-color: #1e3a8a; /* Color de fondo por si falla la imagen */
+  /* Agregamos una imagen real de un taller/tech */
+  background-image: url('https://images.unsplash.com/photo-1581092921461-eab62e97a782?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Mostrar solo en pantallas grandes */
+@media (min-width: 900px) {
+  .left-pane { display: block; }
 }
 
 .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    display: flex;
-    align-items: flex-end;
-    padding: 4rem;
+  position: absolute;
+  inset: 0; /* Shortcut para top, right, bottom, left: 0 */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem;
 }
 
 .overlay-content h2 {
-    color: white;
-    font-size: 2.5rem;
-    margin: 0 0 10px 0;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  line-height: 1.1;
 }
 
 .overlay-content p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  max-width: 80%;
 }
 
-/* CAMBIO AQUÍ: Fondo gris claro para que resalte la tarjeta */
+/* DERECHA (Fondo Gris) */
 .right-pane {
-  flex: 1;
+  flex: 1; /* Toma el espacio restante (100% en móvil, 50% en escritorio) */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background: #f8fafc; /* <--- ANTES ERA WHITE */
+  background: #f8fafc; /* Gris suave para resaltar la tarjeta blanca */
 }
 
 .auth-container {
-    width: 100%;
-    max-width: 400px;
-}
-
-/* HEADER MARCA */
-.brand-header {
-    margin-bottom: 2rem;
-}
-
-.logo {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.brand-header h1 {
-    font-size: 1.8rem;
-    color: #111827;
-    margin: 0;
-    font-weight: 700;
-}
-
-.form-title {
-    color: #64748b;
-    margin-top: 5px;
-}
-
-@media (max-width: 900px) {
-    .left-pane {
-        display: none;
-    }
-
-    .right-pane {
-        width: 100%;
-    }
+  width: 100%;
+  max-width: 440px; /* Un poco más ancho para que la tarjeta respire */
 }
 </style>

@@ -2,7 +2,7 @@
     <AuthLayout title="Bienvenido de nuevo" subtitle="Tu taller te espera. Inicia sesión para continuar." formTitle=" ">
         <div class="login-card">
             <div class="card-header">
-                    
+
                 <p>Acceso al Sistema</p>
             </div>
 
